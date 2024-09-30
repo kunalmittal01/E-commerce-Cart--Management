@@ -1,0 +1,41 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+nav {
+  background-color: #645CFF;
+}
+
+nav .cart-logo span {
+  background-color: #A29DFF;
+}
+
+.gadget svg {
+  color: #645cff;
+}
+
+.total-price {
+  background-color: #645CFF;
+}
+
+@keyframes spinner {
+  to {
+      transform: rotate(360deg)
+  }
+}
+
+.loading {
+  width: 6rem;
+  height: 6rem;
+  border: 5px solid #94a3b8;
+  border-radius: 50%;
+  border-top-color: #645cff;
+  animation: spinner .6s linear infinite;
+  margin: 0 auto
+}
