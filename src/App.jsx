@@ -53,6 +53,13 @@ function App() {
     setGadget(gadget.filter((_,idx) => idx != id)) 
   }
 
+  const removeAllFreq = (id,freq) => {
+    const itemPrice = gadget[id].price*freq;
+    setTotalAmount(totalAmount - itemPrice);
+    setCartFerq(cartFreq - freq);
+    removeItem(id);
+  }
+
   const clearAllItems = ()=> {
     setGadget([]);
     setTotalAmount(0);
@@ -73,7 +80,7 @@ function App() {
           <p className="text-center mb-10 text-xl md:text-4xl">YOUR BAG</p>
           {
             gadget.map((item,idx) => {
-              return <Gadget key={'gadget'+ idx} {...item} id={idx} inc={IncreaseCartFreq} dec={decreaseCartFreq} remove={removeItem} cartItems={cartFreq} />
+              return <Gadget key={'gadget'+ idx} {...item} id={idx} inc={IncreaseCartFreq} dec={decreaseCartFreq} remove={removeItem} cartItems={cartFreq} delAllItem={removeAllFreq} />
             })
           }
         </div>

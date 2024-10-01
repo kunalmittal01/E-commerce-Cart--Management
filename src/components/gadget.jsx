@@ -18,10 +18,6 @@ const Gadget = (props) => {
         props.dec(props.id);
     }
 
-    const deleteItem = ()=> {
-        props.remove(props.id);
-        props.dec(props.id);
-    }
     return (
     <div className="gadget w-2/3 mb-10 flex justify-between gap-5 items-center">
         <div className="flex gap-6 md:w-1/2 md:gap-16">
@@ -29,7 +25,11 @@ const Gadget = (props) => {
             <div className="gadget-cont">
                 <p className="md:text-xl text-gray-800">{props.mobile}</p>
                 <p className="text-gray-500">${props.price}</p>
-                <p onClick={deleteItem} className="text-blue-600 hover:cursor-pointer">remove</p>
+                <p onClick={
+                    ()=>{props.delAllItem(props.id,itemFreq)
+                        setItemFreq(1);
+                    }
+                    } className="text-blue-600 hover:cursor-pointer">remove</p>
             </div>
         </div>
         <div className="gadget-btn flex flex-col items-center">
