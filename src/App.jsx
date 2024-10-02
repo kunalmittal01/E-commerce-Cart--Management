@@ -18,21 +18,25 @@ function App() {
       img: 'https://www.course-api.com/images/cart/phone-1.png',
       mobile: 'Samsung Galaxy S8',
       price: '399.99',
+      itemFreq: 1
     },
     {
       img: 'https://www.course-api.com/images/cart/phone-2.png',
       mobile: 'Google Pixel',
       price: '499.99',
+      itemFreq: 1
     },
     {
       img: 'https://www.course-api.com/images/cart/phone-3.png',
       mobile: 'Xiaomi Redmi Note 2',
-      price: '699.99' 
+      price: '699.99' ,
+      itemFreq: 1
     },
     {
       img: 'https://www.course-api.com/images/cart/phone-4.png',
       mobile: 'Samsung Galaxy S7',
-      price: '599.99'
+      price: '599.99',
+      itemFreq: 1
     }
   ]);
 
@@ -51,13 +55,24 @@ function App() {
 
   const removeItem = (id)=>{
     setGadget(gadget.filter((_,idx) => idx != id)) 
+    setCartFerq(cartFreq - gadget[id].itemFreq)
+    setTotalAmount(totalAmount - parseFloat(gadget[id].price)*gadget[id].itemFreq);
   }
 
-  const removeAllFreq = (id,freq) => {
-    const itemPrice = gadget[id].price*freq;
-    setTotalAmount(totalAmount - itemPrice);
-    setCartFerq(cartFreq - freq);
-    removeItem(id);
+  const handlefreq = (id,fun) => {
+    setGadget(gadget.map((item,idx)=>{
+      if(id == idx) {
+        if(fun == 'increment') {
+          return {...item, itemFreq: item.itemFreq + 1}
+        }
+        else if(fun == 'decrement' && item.itemFreq > 1) {
+          return {...item, itemFreq: item.itemFreq - 1}
+        }
+      }
+      else {
+       return item; 
+      }
+    }))
   }
 
   const clearAllItems = ()=> {
@@ -80,7 +95,7 @@ function App() {
           <p className="text-center mb-10 text-xl md:text-4xl">YOUR BAG</p>
           {
             gadget.map((item,idx) => {
-              return <Gadget key={'gadget'+ idx} {...item} id={idx} inc={IncreaseCartFreq} dec={decreaseCartFreq} remove={removeItem} cartItems={cartFreq} delAllItem={removeAllFreq} />
+              return <Gadget key={'gadget'+ idx} handlefreq={handlefreq} {...item} id={idx} inc={IncreaseCartFreq} dec={decreaseCartFreq} remove={removeItem} cartItems={cartFreq} />
             })
           }
         </div>

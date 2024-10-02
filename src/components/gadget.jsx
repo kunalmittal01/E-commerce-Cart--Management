@@ -1,16 +1,15 @@
 import {useState} from 'react';
 
 const Gadget = (props) => {
-    const [itemFreq, setItemFreq] = useState(1);
-
+    // const [itemFreq, setItemFreq] = useState(1);
     const Increment = ()=> {
-        setItemFreq(itemFreq + 1);
-        props.inc(props.id);    
+        props.inc(props.id);   
+        props.handlefreq(props.id,'increment'); 
     }
 
     const Decrement = ()=> {
-        if(itemFreq > 1) {
-            setItemFreq(itemFreq - 1);
+        if(props.itemFreq > 1) {
+            props.handlefreq(props.id,'decrement'); 
         }
         else {
             props.remove(props.id);
@@ -26,15 +25,14 @@ const Gadget = (props) => {
                 <p className="md:text-xl text-gray-800">{props.mobile}</p>
                 <p className="text-gray-500">${props.price}</p>
                 <p onClick={
-                    ()=>{props.delAllItem(props.id,itemFreq)
-                        setItemFreq(1);
+                    ()=>{props.remove(props.id)
                     }
                     } className="text-blue-600 hover:cursor-pointer">remove</p>
             </div>
         </div>
         <div className="gadget-btn flex flex-col items-center">
             <button onClick={Increment} className="text-xl"><svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg></button>
-            <p className="text-xl">{itemFreq}</p>
+            <p className="text-xl">{props.itemFreq}</p>
             <button onClick={Decrement}  className="text-xl"><svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg></button>
         </div>
     </div>
